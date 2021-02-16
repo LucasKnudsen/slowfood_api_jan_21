@@ -22,6 +22,8 @@ RSpec.describe 'GET /api/products', type: :request do
       expect(response_json["products"][0]['price']).to eq 49
     end
 
+    it 'responds with the right amount of products' do
+      expect(response_json["products"].count).to eq 3
+    end
   end
-
 end
