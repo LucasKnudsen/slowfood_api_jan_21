@@ -1,5 +1,6 @@
-Rspec.describe 'GET /api/products', type: :request do
-  
+RSpec.describe 'GET /api/products', type: :request do
+  let!(:products) { 3.times {create(:product)} }
+
   describe 'successful request' do
     before do
       get '/api/products'
