@@ -1,4 +1,5 @@
 class Api::OrdersController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     product = Product.find(params[:product_id])
@@ -12,6 +13,10 @@ class Api::OrdersController < ApplicationController
         items: order.products
       }
     }, status: 201
-  end
+    else
+      render json: {
+        message: "Well, that went wrong.."
+      }, status: 422
+    end
   end
 end
