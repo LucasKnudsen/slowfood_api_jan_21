@@ -1,6 +1,6 @@
 RSpec.describe 'POST /api/orders', type: :request do
   let!(:user) {create(:user)}
-  let!(:auth) {create(user.create_new_auth_token)}
+  let!(:auth) {user.create_new_auth_token}
   let(:test_product) {create(:product)}
 
   describe 'successfull request ' do
