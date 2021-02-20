@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :pings, only: [:index], constraints: { format: 'json' }
     end
     
-    resources :orders, only: [:create]
+    resources :orders, only: [:create, :update] 
     resources :products, only: [:index]
   end
 end
