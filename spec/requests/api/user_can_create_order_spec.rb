@@ -13,6 +13,7 @@ RSpec.describe 'POST /api/orders', type: :request do
     end
 
     it 'responds with a 201 status' do
+      binding.pry
       expect(response).to have_http_status 201
     end
 
