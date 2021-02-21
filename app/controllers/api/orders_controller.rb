@@ -1,5 +1,6 @@
 class Api::OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_confirmed, only: [:update]
 
   def create
     product = Product.find(params[:product_id])
@@ -36,6 +37,15 @@ class Api::OrdersController < ApplicationController
       render json: {
         message: 'Well, that went wrong..'
       }, status: 422
+    end
+  end
+
+  private
+
+  def is_confirmed
+    if params['confirmed'] == 'true'
+      binding.pry
+
     end
   end
 end
