@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Product.create(title: 'Mini Tacos', description: 'Filled with our lovely pulled pork', price: 69, category: 'starters')
-Product.create(title: 'Tenderloins', description: 'Best meat in town', price: 199, category: 'main')
+Product.create(title: 'Tenderloins', description: 'Best meat in town', price: 199, category: 'mains')
 Product.create(title: 'Rainbow Ice cream', description: 'Because why not..?', price: 129, category: 'desserts')

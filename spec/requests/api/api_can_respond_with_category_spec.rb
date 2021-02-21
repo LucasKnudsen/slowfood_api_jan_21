@@ -2,9 +2,9 @@ RSpec.describe 'GET /api/products', type: :request do
   let!(:products) { 3.times {create(:product)} }
   let!(:products1) { create(:product, category: 'starters')}
 
-  describe 'successful request' do
+  describe 'successful category request ' do
     before do
-      get '/api/products?category=main'
+      get '/api/products?category=mains'
     end  
 
     it 'respond with a 200 status' do
@@ -12,7 +12,7 @@ RSpec.describe 'GET /api/products', type: :request do
     end
 
     it 'responds with correct category' do
-      expect(response_json["products"][0]['category']).to eq "main"
+      expect(response_json["products"][0]['category']).to eq "mains"
     end
 
     it 'responds with the right amount of products' do
