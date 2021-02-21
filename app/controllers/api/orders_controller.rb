@@ -25,7 +25,7 @@ class Api::OrdersController < ApplicationController
     order = Order.find(params['order_id'])
     
     if params['confirmed']
-      order['confirmed'] = true
+      order.update(confirmed: true)
       render json: {
         message: 'Your order is confirmed and will be available sort of soon'
       }

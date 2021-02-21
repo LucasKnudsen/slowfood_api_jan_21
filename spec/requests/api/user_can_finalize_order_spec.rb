@@ -21,5 +21,13 @@ RSpec.describe 'PUT /api/orders/:id', type: :request do
       expect(response).to have_http_status 200
     end
 
+    it 'responds with correct message' do
+      expect(response_json['message']).to eq 'Your order is confirmed and will be available sort of soon'
+    end
+
+    it 'check if the order is confirmed' do
+      expect(test_order.reload.confirmed?).to eq true
+    end
+
   end
 end
