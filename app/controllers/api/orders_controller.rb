@@ -1,6 +1,6 @@
 class Api::OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :is_confirmed, only: [:update]
+  before_action :is_order_confirmed, only: [:update]
 
   def create
     product = Product.find(params[:product_id])
@@ -22,35 +22,41 @@ class Api::OrdersController < ApplicationController
   end
 
   def update
-    product = Product.find(params[:product_id])
     order = Order.find(params['order_id'])
-    order.items.create(product: product)
-    if order.persisted?
+    
+    if params['confirmed']
+      order['confirmed'] = true
       render json: {
-        message: 'The item was added to your order',
-        order: {
-          id: order.id,
-          items: order.products
-        }
+        message: 'Your order is confirmed and will be available sort of soon'
       }
     else
-      render json: {
-        message: 'Well, that went wrong..'
-      }, status: 422
+      product = Product.find(params[:product_id])
+      order.items.create(product: product)
+      if order.persisted?
+        render json: {
+          message: 'The item was added to your order',
+          order: {
+            id: order.id,
+            items: order.products
+          }
+        }
+      else
+        render json: {
+          message: 'Well, that went wrong..'
+        }, status: 422
+      end
     end
   end
 
   private
 
-  def is_confirmed
-    if params['confirmed'] == 'true'
-      order = Order.find(params['order_id'])
-      order['confirmed'] = true
-      render json: {
-        message: 'Your order is confirmed'
-      }
-      
-
-    end
+  def is_order_confirmed 
+    order = Order.find(params['order_id'])
+    return unless order.confirmed?
+    
+    render json: {
+      message: 'Your order is already confirmed. Create a new order to order more!',
+      status: 403
+    }
   end
 end
