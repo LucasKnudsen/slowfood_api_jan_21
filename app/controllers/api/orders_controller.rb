@@ -44,7 +44,12 @@ class Api::OrdersController < ApplicationController
 
   def is_confirmed
     if params['confirmed'] == 'true'
-      binding.pry
+      order = Order.find(params['order_id'])
+      order['confirmed'] = true
+      render json: {
+        message: 'Your order is confirmed'
+      }
+      
 
     end
   end
