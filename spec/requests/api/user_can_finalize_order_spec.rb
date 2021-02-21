@@ -28,6 +28,5 @@ RSpec.describe 'PUT /api/orders/:id', type: :request do
     it 'check if the order is confirmed' do
       expect(test_order.reload.confirmed?).to eq true
     end
-
   end
 end
